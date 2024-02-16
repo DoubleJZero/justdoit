@@ -38,7 +38,6 @@ public class SampleControllerTest {
         Response<SampleResponse> response = controller.getHelloWorld();
         SampleResponse resp = service.getHelloWorld();
 
-
         assertEquals(response.getStatus(), HttpStatus.OK.value());
 
         System.out.println("##### response.getStatus() :: "
