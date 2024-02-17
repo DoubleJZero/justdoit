@@ -1,14 +1,13 @@
 package justdoit.api.payload;
 
-import justdoit.api.constant.CommonMessage;
-
-import org.springframework.http.HttpStatus;
+import justdoit.api.exception.ExceptionType;
+import justdoit.api.exception.JandbException;
 
 /**
  * ResponseFactory
  *
  * <pre>
- * 코드 히스토리 (필요시 변경사항 기록)
+ * code history (Record changes as needed)
  * </pre>
  *
  * @author JandB
@@ -24,7 +23,7 @@ public class ResponseFactory {
      * @param <D> Object Type
      */
     public static <D> Response<D> createSuccess(){
-        return createSuccess(null, CommonMessage.SUCCESS.getCode(), CommonMessage.SUCCESS.getMessage());
+        return createSuccess(null, ExceptionType.SUCCESS.getCode(), ExceptionType.SUCCESS.getMessage());
     }
 
     /**
@@ -36,7 +35,7 @@ public class ResponseFactory {
      * @param <D> Object Type
      */
     public static <D> Response<D> createSuccess(D data){
-        return createSuccess(data, CommonMessage.SUCCESS.getCode(), CommonMessage.SUCCESS.getMessage());
+        return createSuccess(data, ExceptionType.SUCCESS.getCode(), ExceptionType.SUCCESS.getMessage());
     }
 
     /**
@@ -51,7 +50,7 @@ public class ResponseFactory {
      */
     public static <D> Response<D> createSuccess(D data, String code, String message){
         Response<D> response = new Response<>();
-        response.setStatus(HttpStatus.OK.value());
+        response.setStatus(ExceptionType.SUCCESS.getHttpStatus().value());
         response.setCode(code);
         response.setMessage(message);
         if(data != null) response.setData(data);
@@ -84,16 +83,15 @@ public class ResponseFactory {
     public static <D> Response<D> createError(D data, Exception e){
         Response<D> response = new Response<>();
 
-        /*if(e instanceof CustomException){
-            CustomException ce = (CustomException) e;
-            response.setCode(ce.getErrorCode());
-            response.setMessage(ce.getErrorMessage());
-            response.setStatus(ce.getHttpStatus().value());
-        }else{*/
-            response.setCode(CommonMessage.UNKNOWN.getCode());
-            response.setMessage(CommonMessage.UNKNOWN.getMessage());
-            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        //}
+        if(e instanceof JandbException je){
+            response.setCode(je.getCode());
+            response.setMessage(je.getMessage());
+            response.setStatus(je.getHttpStatus().value());
+        }else{
+            response.setCode(ExceptionType.UNKNOWN.getCode());
+            response.setMessage(e.getMessage());
+            response.setStatus(ExceptionType.UNKNOWN.getHttpStatus().value());
+        }
 
         if(data != null) response.setData(data);
 

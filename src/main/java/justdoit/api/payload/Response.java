@@ -1,24 +1,29 @@
 package justdoit.api.payload;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Response
  *
  * <pre>
- * 코드 히스토리 (필요시 변경사항 기록)
+ * code history (Record changes as needed)
  * </pre>
  *
  * @author JandB
  * @since 1.0
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Data
+@Getter
+@Setter
 public class Response<D> {
 
     private int status;
+
     private String code;
+
     private String message;
+
     private D data;
 }
