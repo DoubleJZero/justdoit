@@ -1,6 +1,7 @@
 package justdoit.api.controller;
 
 import justdoit.api.dto.response.SampleResponse;
+import justdoit.api.exception.JandbException;
 import justdoit.api.payload.Response;
 import justdoit.api.service.SampleService;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,7 @@ public class SampleControllerTest {
 
     @Test
     @DisplayName("헬로우_월드!")
-    void sample() {
+    void sample() throws JandbException {
 
         Response<SampleResponse> response = controller.getHelloWorld();
         SampleResponse resp = service.getHelloWorld();

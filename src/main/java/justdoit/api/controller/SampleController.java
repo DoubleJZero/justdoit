@@ -1,6 +1,7 @@
 package justdoit.api.controller;
 
 import justdoit.api.dto.response.SampleResponse;
+import justdoit.api.exception.JandbException;
 import justdoit.api.payload.Response;
 import justdoit.api.payload.ResponseFactory;
 import justdoit.api.service.SampleService;
@@ -31,7 +32,7 @@ public class SampleController {
      * @return hello world!
      */
     @GetMapping
-    public Response<SampleResponse> getHelloWorld() {
+    public Response<SampleResponse> getHelloWorld() throws JandbException {
 
         return ResponseFactory.createSuccess(sampleService.getHelloWorld());
     }

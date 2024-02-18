@@ -17,7 +17,7 @@ public class JandbExceptionFactory {
      * @param info ExceptionInfo
      * @return JandbException
      */
-    static JandbException createException(ExceptionInfo info){
+    public static JandbException createException(ExceptionInfo info){
 
         return switch (info.getHttpStatus()) {
             case BAD_REQUEST -> new BadRequestException(info);
