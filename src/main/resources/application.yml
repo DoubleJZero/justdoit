@@ -1,2 +1,20 @@
 server:
   port : 8080
+
+jwt:
+  header: Authorization
+  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
+  secret: a2FyaW10b2thcmltdG9rYXJpbXRva2FyaW10b2thcmltdG9rYXJpbXRva2FyaW10b2thcmltdG9rYXJpbXRva2FyaW10b2thcmltdG9rYXJpbXRva2FyaW10b2thcmltdG9rYXJpbXRva2FyaW10b2thcmltdG9rYXJpbXRva2FyaW10b2thcmltdG9rYXJpbQ==
+  token-validity-in-seconds: 86400 # ttl (초)
+
+spring:
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/jandb
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: jandb
+    password: jandb
+    #username: ENC(AOlqjc7Vu97CirlATUxSDg==)
+    #password: ENC(qg5r8Eg7+MunDRuXG0nfcg==)
+#url: jdbc:mariadb://127.0.0.1:3306/jandb
+logging:
+  config: classpath:log/logback-spring.xml

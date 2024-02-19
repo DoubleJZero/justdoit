@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### query dsl generated ###
+/generated
+.generated
+generated/**
