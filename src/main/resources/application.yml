@@ -11,10 +11,17 @@ spring:
   datasource:
     url: jdbc:mariadb://127.0.0.1:3306/jandb
     driver-class-name: org.mariadb.jdbc.Driver
-    username: jandb
-    password: jandb
-    #username: ENC(AOlqjc7Vu97CirlATUxSDg==)
-    #password: ENC(qg5r8Eg7+MunDRuXG0nfcg==)
+    #username: jandb
+    #password: jandb
+    username: ENC(AOlqjc7Vu97CirlATUxSDg==)
+    password: ENC(qg5r8Eg7+MunDRuXG0nfcg==)
 #url: jdbc:mariadb://127.0.0.1:3306/jandb
 logging:
   config: classpath:log/logback-spring.xml
+
+encrypt:
+  algolithm: PBEWithMD5AndDES
+  key-obtention-iterations: 1000
+  pool-size: 1
+  salt-generator-class-name: org.jasypt.salt.RandomSaltGenerator
+  string-output-type: base64

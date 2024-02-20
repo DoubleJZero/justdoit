@@ -8,9 +8,9 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version "${springBootVersion}"
 	id 'io.spring.dependency-management' version "${dependencyManagementVersion}"
-	//querydsl 추가
-	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"//인텔리제이 탭에서 그래들 관련 명령어를 쉽게 볼 수 있게 해준다(선택)
-	// 해당 플러그인 추가로 동일한 Q파일 생성 문제가 발생한다고 한다 추가하지 말자!
+	//querydsl 추가 start
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+	//querydsl 추가 end
 }
 
 group = 'kr.co.jandb'
@@ -19,14 +19,6 @@ version = '0.0.1-SNAPSHOT'
 java {
 	sourceCompatibility = '17'
 }
-
-//querydsl 추가 start
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
-//querydsl 추가 end
 
 repositories {
 	mavenCentral()
@@ -59,8 +51,10 @@ dependencies {
 
 	// querydsl
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
-	// trouble shooting(issue: qclass is not generated, solve: implementation -> annotationProcessor modify)
+	// 20240219 trouble shooting(issue: qclass is not generated, solve: implementation -> annotationProcessor modify)
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
+	// 20240220 trouble shooting(issue: Attempt to recreate a file for type qclass( maybe qclass generated folder duplicate :compileJava), solve: annotationProcessor -> implementation modify)
+	//implementation "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
 	//annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
@@ -85,6 +79,8 @@ tasks.named('test') {
 */
 
 //querydsl 추가
+// 20240220 build 시에는 qclass가 생성이 안되나 한번 실행하면 /generated/generated/ 하위에 qclass 생성됨
+// 처음 세팅 시 repository에 qclass 안나올 수 있으므로 관련 처리 필요함. 어떻게든 서비스를 한번 실행해야 함.
 def querydslDir = "$projectDir/generated/querydsl"
 
 querydsl {
@@ -95,13 +91,37 @@ sourceSets {
 	main.java.srcDir querydslDir
 }
 compileQuerydsl{
-	options.annotationProcessorPath = configurations.querydsl
+	// 20240220 머가 문제인지 아직 정확하게 파악이 안됨.
+	// qclass 생성 path의 문제인지 머가 문제인지 원인을 모르겠음.
+	// 계속 이것 저것 테스트 해봤으나 할때마다 다른 문제가 발생함.
+	// 우선 위 dependencies 에서 annotationProcessor > implementation 변경으로
+	// 최종 임시 해결 함. 경우에 따라서 implementation > annotationProcessor 변경해야 할 경우도 발생함.
+	//File file = new File("$projectDir/generated/querydsl/justdoit")
+
+	//File file2 = new File("$projectDir/generated/generated/justdoit")
+
+	//println "file >>>>> " + file.exists()
+	//println "file2 >>>>> " + file2.exists()
+
+	//if (!(file.exists() || file2.exists())) {
+		options.annotationProcessorPath = configurations.querydsl
+	//}
 }
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-	querydsl.extendsFrom compileClasspath
+	//File file = new File("$projectDir/generated/querydsl/justdoit")
+
+	//File file2 = new File("$projectDir/generated/generated/justdoit")
+
+	//println "222 file >>>>> " + file.exists()
+	//println "222 file2 >>>>> " + file2.exists()
+
+	//if (!(file.exists() || file2.exists())) {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+
+		querydsl.extendsFrom compileClasspath
+	//}
 }
 clean {
 	delete file(querydslDir)
