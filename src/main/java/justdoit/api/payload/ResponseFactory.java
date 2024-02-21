@@ -22,7 +22,7 @@ public class ResponseFactory {
      * @return Response<D>
      * @param <D> Object Type
      */
-    public static <D> Response<D> createSuccess(){
+    public static <D> Response<D> createSuccess() {
         return createSuccess(null, ExceptionType.SUCCESS.getCode(), ExceptionType.SUCCESS.getMessage());
     }
 
@@ -34,7 +34,7 @@ public class ResponseFactory {
      * @return Response<D>
      * @param <D> Object Type
      */
-    public static <D> Response<D> createSuccess(D data){
+    public static <D> Response<D> createSuccess(D data) {
         return createSuccess(data, ExceptionType.SUCCESS.getCode(), ExceptionType.SUCCESS.getMessage());
     }
 
@@ -48,7 +48,7 @@ public class ResponseFactory {
      * @return Response<D>
      * @param <D> Object Type
      */
-    public static <D> Response<D> createSuccess(D data, String code, String message){
+    public static <D> Response<D> createSuccess(D data, String code, String message) {
         Response<D> response = new Response<>();
         response.setStatus(ExceptionType.SUCCESS.getHttpStatus().value());
         response.setCode(code);
@@ -66,7 +66,7 @@ public class ResponseFactory {
      * @return Response<D>
      * @param <D> Object type
      */
-    public static <D> Response<D> createError(Exception e){
+    public static <D> Response<D> createError(Exception e) {
 
         return createError(null, e);
     }
@@ -80,7 +80,7 @@ public class ResponseFactory {
      * @return Response<D>
      * @param <D> Object type
      */
-    public static <D> Response<D> createError(D data, Exception e){
+    public static <D> Response<D> createError(D data, Exception e) {
         Response<D> response = new Response<>();
 
         if(e instanceof JandbException je){

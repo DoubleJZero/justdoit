@@ -52,7 +52,7 @@ public class JandbUserDetailsService implements UserDetailsService {
                 .collect(Collectors.toList());*/
 
         // TODO 현시점 권한을 따로 관리하지 않기때문에 임의 하드코딩 데이터 사용
-        List<String> dumpAuthList = List.of(UserRole.USER.getName(),UserRole.MANAGER.getName());
+        List<String> dumpAuthList = List.of(UserRole.MANAGER.getName(), UserRole.ADMIN.getName());
 
         List<GrantedAuthority> grantedAuthorities = dumpAuthList.stream()
                 .map(SimpleGrantedAuthority::new)
