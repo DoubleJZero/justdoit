@@ -101,7 +101,7 @@ public class SwaggerConfig {
                 , javadocProvider);
     }
 
-    public  class PrefixAdjustedOpenApiService extends OpenAPIService {
+    public class PrefixAdjustedOpenApiService extends OpenAPIService {
 
         /**
          * Instantiates a new Open api builder.
