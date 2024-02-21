@@ -1,5 +1,7 @@
 package justdoit.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import justdoit.api.dto.request.LoginRequest;
 import justdoit.api.dto.response.TokenResponse;
@@ -33,12 +35,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/login")
+@Tag(name = "01 로그인", description = "로그인 API")
 public class LoginController {
 
     private final TokenProvider tokenProvider;
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    @Operation(summary = "로그인 인증 후 토큰 생성", description = "로그인 인증 후 토큰 생성한다.")
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> authorize(@Valid @RequestBody LoginRequest loginRequest) {
 

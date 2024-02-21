@@ -22,6 +22,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private static final String[] AUTH_WHITELIST = {
+            "/", "/login/**", "/error", "/favicon.ico",
+            "/swagger-ui/**", "/api-docs", "/swagger-ui-custom.html",
+            "/v3/api-docs/**", "/api-docs/**", "/swagger-ui.html"
+    };
+
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -44,9 +50,9 @@ public class SecurityConfig {
                 // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정하겠다.
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers("/", "/login/**").permitAll()  // 로그인 관련 api 인증 무시
-                                .requestMatchers("/error").permitAll()          // error message
-                                .requestMatchers("/favicon.ico").permitAll()    // favicon.ico 요청 인증 무시
+                                .requestMatchers(AUTH_WHITELIST).permitAll()  // 로그인 관련 api 인증 무시
+                                //.requestMatchers("/error").permitAll()          // error message
+                                //.requestMatchers("/favicon.ico").permitAll()    // favicon.ico 요청 인증 무시
                                 .anyRequest().authenticated() // 그 외 인증 없이 접근X
                 )
                 .exceptionHandling((exceptionConfig) ->

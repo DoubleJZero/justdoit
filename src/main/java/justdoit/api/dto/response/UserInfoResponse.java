@@ -1,5 +1,6 @@
 package justdoit.api.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import justdoit.data.entity.TbUserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.experimental.SuperBuilder;
  * UserInfoResponse
  *
  * <pre>
- * 코드 히스토리 (필요시 변경사항 기록)
+ * code history (Record changes as needed)
  * </pre>
  *
  * @author JandB
@@ -23,14 +24,19 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 @Setter
+@Schema(description = "사용자 정보 response")
 public class UserInfoResponse {
 
+    @Schema(description = "사용자 아아디", example = "jandb")
     private String userId;              //사용자 아아디
 
+    @Schema(description = "사용자 비밀번호", example = "jandb")
     private String userPw;              //사용자 비밀번호
 
+    @Schema(description = "사용자 이름", example = "제임스")
     private String userNm;              //사용자 이름
 
+    @Schema(description = "사용자 생년월일", example = "19900101")
     private String userBirth;           //사용자 생년월일
 
     /**

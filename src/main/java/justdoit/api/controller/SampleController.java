@@ -1,5 +1,7 @@
 package justdoit.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import justdoit.api.dto.response.SampleResponse;
 import justdoit.api.exception.JandbException;
 import justdoit.api.payload.Response;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/sample/helloword")
+@Tag(name = "00 Sample", description = "Sample API")
 public class SampleController {
 
     private final SampleService sampleService;
@@ -31,6 +34,7 @@ public class SampleController {
      * hello world!
      * @return hello world!
      */
+    @Operation(summary = "sample hello world return", description = "hello world 를 반환한다.")
     @GetMapping
     public Response<SampleResponse> getHelloWorld() throws JandbException {
 
