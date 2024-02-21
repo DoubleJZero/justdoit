@@ -21,11 +21,20 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.filter.ForwardedHeaderFilter;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * SwaggerConfig
+ *
+ * <pre>
+ * code history (Record changes as needed)
+ * </pre>
+ *
+ * @author JandB
+ * @since 1.0
+ */
 @Configuration
 @Profile("!prod")
 public class SwaggerConfig {

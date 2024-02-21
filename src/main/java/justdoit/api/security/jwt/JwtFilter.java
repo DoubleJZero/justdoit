@@ -14,6 +14,16 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
 
+/**
+ * JwtFilter
+ *
+ * <pre>
+ * code history (Record changes as needed)
+ * </pre>
+ *
+ * @author JandB
+ * @since 1.0
+ */
 @Slf4j
 @RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {

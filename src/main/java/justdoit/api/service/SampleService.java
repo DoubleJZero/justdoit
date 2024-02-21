@@ -8,6 +8,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+/**
+ * SampleService
+ *
+ * <pre>
+ * code history (Record changes as needed)
+ * </pre>
+ *
+ * @author JandB
+ * @since 1.0
+ */
 @Service
 public class SampleService {
 

@@ -4,10 +4,10 @@ import justdoit.data.entity.TbUserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * 사용자 repository
+ * UserRepository
  *
  * <pre>
- * 코드 히스토리 (필요시 변경사항 기록)
+ * code history (Record changes as needed)
  * </pre>
  *
  * @author JandB

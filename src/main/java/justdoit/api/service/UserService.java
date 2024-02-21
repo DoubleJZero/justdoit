@@ -16,10 +16,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * 사용자 service
+ * UserService
  *
  * <pre>
- * 코드 히스토리 (필요시 변경사항 기록)
+ * code history (Record changes as needed)
  * </pre>
  *
  * @author JandB

@@ -19,6 +19,16 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+/**
+ * TokenProvider
+ *
+ * <pre>
+ * code history (Record changes as needed)
+ * </pre>
+ *
+ * @author JandB
+ * @since 1.0
+ */
 @Slf4j
 @Component
 public class TokenProvider implements InitializingBean {

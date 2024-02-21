@@ -15,6 +15,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * JandbUserDetailsService
+ *
+ * <pre>
+ * code history (Record changes as needed)
+ * </pre>
+ *
+ * @author JandB
+ * @since 1.0
+ */
 @Component("userDetailsService")
 @RequiredArgsConstructor
 public class JandbUserDetailsService implements UserDetailsService {

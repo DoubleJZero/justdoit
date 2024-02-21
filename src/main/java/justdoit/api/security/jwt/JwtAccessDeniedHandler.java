@@ -2,15 +2,22 @@ package justdoit.api.security.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import justdoit.api.exception.ExceptionType;
-import justdoit.api.exception.JandbExceptionFactory;
-import justdoit.api.payload.ResponseFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * JwtAccessDeniedHandler
+ *
+ * <pre>
+ * code history (Record changes as needed)
+ * </pre>
+ *
+ * @author JandB
+ * @since 1.0
+ */
 @Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     @Override

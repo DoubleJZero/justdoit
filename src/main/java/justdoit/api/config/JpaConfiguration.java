@@ -10,7 +10,7 @@ import jakarta.persistence.*;
  * JpaConfiguration
  *
  * <pre>
- * 코드 히스토리 (필요시 변경사항 기록)
+ * code history (Record changes as needed)
  * </pre>
  *
  * @author JandB
