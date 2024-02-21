@@ -2,6 +2,7 @@ package justdoit.api.service;
 
 import justdoit.api.dto.request.UserInfoRequest;
 import justdoit.api.dto.response.UserInfoResponse;
+import justdoit.api.exception.JandbException;
 import justdoit.api.repository.UserRepository;
 import justdoit.data.entity.TbUserInfo;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,7 @@ public class UserService {
      * 사용자 목록 조회
      * @return 사용자목록
      */
-    public List<UserInfoResponse> getUserList(){
+    public List<UserInfoResponse> getUserList() throws JandbException {
         return userRepository.findAll().stream().map(UserInfoResponse::of).collect(Collectors.toList());
     }
 
@@ -48,7 +49,7 @@ public class UserService {
      * @param userInfoRequest 사용자정보DTO
      */
     @Transactional
-    public void saveUser(UserInfoRequest userInfoRequest){
+    public void saveUser(UserInfoRequest userInfoRequest) {
         Optional.ofNullable(userRepository.findByUserId(userInfoRequest.getUserId()))
                 .ifPresentOrElse(e -> {
                     e.setUserPw(bCryptPasswordEncoder.encode(userInfoRequest.getUserPw()));
@@ -69,7 +70,7 @@ public class UserService {
      * 사용자 검증
      * @param userInfoRequest 사용자정보DTO
      */
-    public String checkUser(UserInfoRequest userInfoRequest){
+    public String checkUser(UserInfoRequest userInfoRequest) throws JandbException {
         return Optional.ofNullable(
                 userRepository.findByUserIdAndUserPw(
                         userInfoRequest.getUserId()

@@ -2,9 +2,15 @@ package justdoit.api.controller;
 
 import justdoit.api.dto.request.UserInfoRequest;
 import justdoit.api.dto.response.UserInfoResponse;
+import justdoit.api.exception.JandbException;
+import justdoit.api.payload.Response;
+import justdoit.api.payload.ResponseFactory;
+import justdoit.api.security.constance.UserRole;
 import justdoit.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +38,8 @@ public class UserController {
      * @return 사용자목록
      */
     @GetMapping("/list")
-    public List<UserInfoResponse> getUserList(){
-        return userService.getUserList();
+    public Response<List<UserInfoResponse>> getUserList() throws JandbException {
+        return ResponseFactory.createSuccess(userService.getUserList());
     }
 
     /**
@@ -50,8 +56,9 @@ public class UserController {
      * @param userInfoRequest 사용자정보DTO
      */
     @PostMapping("/checkUser")
-    public String checkUser(@RequestBody UserInfoRequest userInfoRequest){
-        return userService.checkUser(userInfoRequest);
+    @PreAuthorize("hasRole('ADMIN')")
+    public Response<String> checkUser(@RequestBody UserInfoRequest userInfoRequest) throws JandbException {
+        return ResponseFactory.createSuccess(userService.checkUser(userInfoRequest));
     }
 
     /**
