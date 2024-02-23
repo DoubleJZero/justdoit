@@ -42,8 +42,8 @@ public class LoginController {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    @Operation(summary = "로그인 인증 후 토큰 생성", description = "로그인 인증 후 토큰 생성한다.")
     @PostMapping("/login")
+    @Operation(summary = "로그인 인증 후 토큰 생성", description = "로그인 인증 후 토큰 생성한다.")
     public ResponseEntity<TokenResponse> authorize(@Valid @RequestBody LoginRequest loginRequest) {
 
         UsernamePasswordAuthenticationToken authenticationToken =

@@ -6,6 +6,16 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+/**
+ * SampleBatch
+ *
+ * <pre>
+ * code history (Record changes as needed)
+ * </pre>
+ *
+ * @author JandB
+ * @since 1.0
+ */
 @Slf4j
 @Component
 @EnableScheduling

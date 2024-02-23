@@ -9,6 +9,7 @@ import justdoit.api.payload.ResponseFactory;
 import justdoit.api.service.SampleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,10 +35,26 @@ public class SampleController {
      * hello world!
      * @return hello world!
      */
-    @Operation(summary = "sample hello world return", description = "hello world 를 반환한다.")
     @GetMapping
+    @Operation(summary = "sample hello world return", description = "hello world 를 반환한다.")
     public Response<SampleResponse> getHelloWorld() throws JandbException {
 
         return ResponseFactory.createSuccess(sampleService.getHelloWorld());
+    }
+
+    @GetMapping("/getRedis")
+    @Operation(summary = "get redis", description = "hello wold get to redis")
+    public Response<SampleResponse> getRedis() throws JandbException {
+
+        return ResponseFactory.createSuccess(sampleService.getRedis());
+    }
+
+    @PutMapping("/saveRedis")
+    @Operation(summary = "save redis", description = "hello wold save to redis")
+    public Response<Void> saveRedis() throws JandbException {
+
+        sampleService.saveSampleRedis();
+
+        return ResponseFactory.createSuccess();
     }
 }

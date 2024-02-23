@@ -4,10 +4,15 @@ import justdoit.api.dto.response.SampleResponse;
 import justdoit.api.exception.ExceptionType;
 import justdoit.api.exception.JandbException;
 import justdoit.api.exception.JandbExceptionFactory;
+import justdoit.api.redis.constance.RedisKeys;
+import justdoit.api.redis.service.RedisService;
 import justdoit.api.security.util.SecurityUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 /**
@@ -22,7 +27,10 @@ import java.util.Random;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class SampleService {
+
+    private final RedisService<SampleResponse> redisService;
 
     public SampleResponse getHelloWorld() throws JandbException {
 
@@ -37,5 +45,19 @@ public class SampleService {
         }
 
         return SampleResponse.of("Hello World!");
+    }
+
+    public SampleResponse getRedis() throws JandbException {
+
+        return redisService.get(RedisKeys.SAMPLE.getName(), SampleResponse.class);
+    }
+
+    public void saveSampleRedis() throws JandbException {
+        StringBuilder sb = new StringBuilder("Hello World ");
+        Random random = new Random(System.currentTimeMillis());
+
+        sb.append(random.nextInt(100));
+
+        redisService.set(RedisKeys.SAMPLE.getName(), SampleResponse.of(sb.toString()), Duration.of(24L, ChronoUnit.HOURS));
     }
 }

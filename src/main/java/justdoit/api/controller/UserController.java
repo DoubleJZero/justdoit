@@ -100,5 +100,4 @@ public class UserController {
     public Response<UserInfoResponse> getUserInfoDetail(@RequestBody UserInfoRequest userInfoRequest) throws JandbException {
         return ResponseFactory.createSuccess(userService.getUserInfoDetail(userInfoRequest.getUserId()));
     }
-
 }
