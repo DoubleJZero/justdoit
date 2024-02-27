@@ -6,7 +6,6 @@ import justdoit.api.exception.JandbException;
 import justdoit.api.exception.JandbExceptionFactory;
 import justdoit.api.redis.constance.RedisKeys;
 import justdoit.api.redis.service.RedisService;
-import justdoit.api.security.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -59,5 +58,22 @@ public class SampleService {
         sb.append(random.nextInt(100));
 
         redisService.set(RedisKeys.SAMPLE.getName(), SampleResponse.of(sb.toString()), Duration.of(24L, ChronoUnit.HOURS));
+    }
+
+    public String getCacheSmaple(String strnum) throws JandbException {
+        StringBuilder sb = new StringBuilder("cache sample ");
+        int num = 0;
+
+        if (strnum == null) {
+            num = 1;
+        } else {
+            num = Integer.parseInt(strnum);
+        }
+
+        Random random = new Random(System.currentTimeMillis());
+
+        sb.append(random.nextInt(100) * num);
+
+        return sb.toString();
     }
 }

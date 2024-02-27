@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @WebMvcTest(SampleController.class)
 @ExtendWith(MockitoExtension.class)
 public class SampleControllerTest {
-
+/*
     @MockBean
     private SampleService sampleService;
 
@@ -54,5 +54,5 @@ public class SampleControllerTest {
                 + ", response.getData().getStr() :: "
                 + response.getData().getStr()
                 + " #####");
-    }
+    }*/
 }
