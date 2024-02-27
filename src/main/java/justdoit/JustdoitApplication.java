@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  * <pre>
  * code history (Record changes as needed)
+ * EnableJpaAuditing annotation is to use BaseTimeEntity
  * </pre>
  *
  * @author JandB
