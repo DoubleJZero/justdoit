@@ -4,6 +4,8 @@ import justdoit.api.dto.response.SampleResponse;
 import justdoit.api.exception.ExceptionType;
 import justdoit.api.exception.JandbException;
 import justdoit.api.exception.JandbExceptionFactory;
+import justdoit.api.feign.DummyApiFeignClient;
+import justdoit.api.feign.response.DummyApiResponse;
 import justdoit.api.redis.constance.RedisKeys;
 import justdoit.api.redis.service.RedisService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -30,6 +33,8 @@ import java.util.Random;
 public class SampleService {
 
     private final RedisService<SampleResponse> redisService;
+
+    private final DummyApiFeignClient dummyApiFeignClient;
 
     public SampleResponse getHelloWorld() throws JandbException {
 
@@ -75,5 +80,10 @@ public class SampleService {
         sb.append(random.nextInt(100) * num);
 
         return sb.toString();
+    }
+
+    public List<DummyApiResponse> getDummyApi() throws JandbException {
+
+        return dummyApiFeignClient.getDummyApi();
     }
 }

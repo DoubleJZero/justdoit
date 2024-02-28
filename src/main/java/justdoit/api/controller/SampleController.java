@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import justdoit.api.dto.response.SampleResponse;
 import justdoit.api.exception.JandbException;
+import justdoit.api.feign.response.DummyApiResponse;
 import justdoit.api.payload.Response;
 import justdoit.api.payload.ResponseFactory;
 import justdoit.api.service.SampleService;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * SampleControllerTest
@@ -82,5 +85,12 @@ public class SampleController {
     public Response<Void> deleteCache(@PathVariable("strnum") String strnum) {
 
         return ResponseFactory.createSuccess();
+    }
+
+    @GetMapping("/getDummyApi")
+    @Operation(summary = "get dummy api", description = "dummy api call")
+    public Response<List<DummyApiResponse>> getDummyApi() throws JandbException {
+
+        return ResponseFactory.createSuccess(sampleService.getDummyApi());
     }
 }
